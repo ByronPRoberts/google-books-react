@@ -4,14 +4,14 @@ import BookContainer from "./components/bookContainer"
 import './App.css';
 
 
-const App = () => <BookContainer/>;
+// const App = () => <BookContainer/>;
 
-// class App extends Component {
-//   render() {
-//     return (
-//      <BookContainer/>
-//     )
-// }
-// };
+class App extends Component {
+  render() {
+    return (
+     <BookContainer/>
+    )
+}
+};
 
 export default App;

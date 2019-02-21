@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "./Button";
-import Input from "./Input"
-import "./search.css";
+import Button from "../components/Search/Button";
+import Input from "../components/Search/Input";
+import "../components/Search/search.css";
 
 const Search = (props) => {
     return(
@@ -22,18 +22,18 @@ const Search = (props) => {
                 <h3>Results</h3>
             </div>
             <div className="card-body">
-                {props.result.map((book)=>{
+                {props.result.map((Book)=>{
                     return(
-                        <div key={book._id}>
+                        <div key={Book._id}>
                            <div className='article-display row'>
-					            <a href={book.link}  className='col-md-4'><img src={book.image} className='img-responsive' alt='thumbnail'/></a>
+					            <a href={Book.link}  className='col-md-4'><img src={Book.image} className='img-responsive' alt='thumbnail'/></a>
 					            <div className='col-md-3'>
-					                <h4>Title: {book.title}</h4>
+					                <h4>Title: {Book.title}</h4>
 					            </div>
                                 <div className='col-md-3'>
-					                <h4>Synopsis: {book.description}</h4>
+					                <h4>Synopsis: {Book.description}</h4>
 					            </div>
-					            <button onClick={() => props.handleSaveButton(book.title, book.link, book.description, book.image)} className='btn btn-primary col-md-2'>save</button>
+					            <button onClick={() => props.handleSaveButton(Book.title, Book.link, Book.description, Book.image)} className='btn btn-primary col-md-2'>save</button>
 					        </div>
 					    <hr/>
 					    </div>

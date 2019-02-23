@@ -18,7 +18,7 @@ const Search = (props) => {
                 </form>
             </div>
         </div>
-        <Result/>
+        <Result result={props.result}/>
     </div>    
 )};
 // const Result =(props) => {

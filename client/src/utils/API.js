@@ -1,21 +1,22 @@
 import axios from "axios";
-const BASEURL = "https://www.googleapis.com/books/v1/volumes?";
-const APIKEY= process.env.GOOGLE_BOOKS_API_KEY;
+const BASEURL = "https://www.googleapis.com/books/v1/volumes?q=";
+// const APIKEY= process.env.GOOGLE_BOOKS_API_KEY;
 
 export default {
     search: function(query){
-        return axios.get(BASEURL + query + APIKEY);
+        return axios.get(BASEURL + query + "+intitle");
     },
-    getData(search){
-		return axios.get(`${URL}?q=${search}&apit-key=${APIKEY}`);
+    getData(query){
+		return axios.get(BASEURL + query + "+intitle");
+		// return axios.get(`${URL}?q=${search}&apit-key=${APIKEY}`);
 	},
-	getSavedArticles(){
+	getSavedBooks(){
 		return axios.get("/api/books");
 	},
-	saveArticles(Book){
+	saveBooks(Book){
 		return axios.post("api/books", Book)
 	},
-	deleteArticle(id) {
+	deleteBook(id) {
 		return axios.delete("api/books/" + id);
 	}
 };

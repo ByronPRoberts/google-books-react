@@ -2,7 +2,8 @@ const router = require("express").Router();
 const bookController = require("../../bookController/bookController");
 
 router.route("/")
-	.get(bookController.findAll);
+	.get(bookController.findAll)
+	.post(bookController.update)
 	// .post(bookController.create);
 
 router.get("api/test", (req,res) => {
@@ -13,7 +14,7 @@ router.get("api/test", (req,res) => {
 router 
 	.route("/:id")
 	.get(bookController.findOne)
-	.put(bookController.update)
+	
 	.delete(bookController.delete);
 
 module.exports = router;

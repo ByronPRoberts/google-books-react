@@ -11,9 +11,9 @@ class BookContainer extends Component {
     savedBooks: []
   };
 
-//   componentDidMount() {
-//     this.loadBooks();
-//   }
+  componentDidMount() {
+    this.loadBooks();
+  }
 
   loadBooks() {
     API.getSavedBooks()
@@ -40,15 +40,42 @@ class BookContainer extends Component {
       event.preventDefault();
   }
 
-  handleSaveButton = (title, link, image, description) => {
-    API.saveBooks({ title, link, image, description })
+  handleSaveButton = (title, link, image, description, author) => {
+    API.saveBooks({ title, link, image, description, author })
       .then((res) => {
+        res.data.items.forEach((item, i) => {
+          if (item.volumeInfo.title && item.volumeInfo.authors && item.volumeInfo.description && item.volumeInfo.imageLinks.thumbnail) {
+            let bookInfo = {
+              _id: i,
+              link: item.volumeInfo.canonicalVolumeLink,
+              title: item.volumeInfo.title,
+              author: item.volumeInfo.authors[0],
+              description: item.volumeInfo.description,
+              image: item.volumeInfo.imageLinks.thumbnail
+            }
+            this.setState(prevState => ({
+              savedBooks: [...prevState.savedBooks, bookInfo]
+            }))
+          }
+        })
+        // this.setState({ result: res.data });
         this.loadBooks();
       })
       .catch(err => {
         console.log(err);
       });
+  
   };
+
+  // handleSaveButton = (title, link, image, description) => {
+  //   API.saveBooks({ title, link, image, description })
+  //     .then((res) => {
+  //       this.loadBooks();
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
 
   handleInputChange = event => {
     this.setState({ search: event.target.value });
@@ -58,7 +85,22 @@ class BookContainer extends Component {
     if (this.state.search !== "") {
       API.getData(this.state.search)
         .then((res) => {
-          this.setState({ result: res.data });
+          res.data.items.forEach((item, i) => {
+            if (item.volumeInfo.title && item.volumeInfo.authors && item.volumeInfo.description && item.volumeInfo.imageLinks.thumbnail) {
+              let bookInfo = {
+                _id: i,
+                link: item.volumeInfo.canonicalVolumeLink,
+                title: item.volumeInfo.title,
+                author: item.volumeInfo.authors[0],
+                description: item.volumeInfo.description,
+                image: item.volumeInfo.imageLinks.thumbnail
+              }
+              this.setState(prevState => ({
+                result: [...prevState.result, bookInfo]
+              }))
+            }
+          })
+          // this.setState({ result: res.data });
         })
         .catch(err => {
           console.log(err);

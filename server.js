@@ -13,8 +13,8 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 // Add routes, both API and view
-app.use(routes);
-
+app.use("/api/books", routes);
+//localhost:3001/api/books/
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/google-books-react");
 

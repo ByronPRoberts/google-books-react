@@ -1,6 +1,7 @@
 import React from "react";
 
 const Saved =(props)=>{
+    console.log(props);
     return(
         <div className="card container">
             <div className="card-header">
